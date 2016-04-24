@@ -1,4 +1,7 @@
 import {Component} from 'angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+
+import {DiaryEntry}   from './diaryEntry';
 
 @Component({
     selector: 'login-form',
@@ -15,10 +18,11 @@ import {Component} from 'angular2/core';
 			<br/>
 			<input type="password" id="password">
 			<br/>
-			<button type="submit">Sign In</button>
+			<a [routerLink]="['DiaryEntry']"><button type="submit">Sign In</button></a>
 			<br/>
 			<a href="#"><p class="small">Forgot your password?</p></a>
 		</div>
-    `
+    `,
+	directives: [ROUTER_DIRECTIVES]
 })
 export class LoginForm { }
