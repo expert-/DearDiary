@@ -6,29 +6,27 @@ import {LoginForm} from './loginForm';
     template: `
     <div class="diary-entry-box">
     <form id="diaryEntryForm">
-		<textarea id= "diary-entry-textarea" #textArea (focus)="startTimer(textArea)" (keyup)= "resetTimer(textArea)" form="diaryEntryForm" placeholder= "hi ..." rows=8></textarea>
+		<textarea id= "diary-entry-textarea" #textArea (keyup)= "resetTimer(textArea)" form="diaryEntryForm" rows=8></textarea>
         <br/>
-        <input id="diary-entry-submit" type = submit value="That's all">
+        <button class="diary-entry-submit" (click)="pauseTimer()">Pause</button><input class="diary-entry-submit" type = submit value="That's all">
         </form>
 	</div>
     `
 })
 export class DiaryEntry {
 
-    myTimer: any;
+    public myTimer: any;     
 
-    startTimer(st: HTMLInputElement) {
-        this.myTimer = setInterval(this.myTimerFunction(st), 2000);        
-    }   
-myTimerFunction(st: HTMLInputElement) {
-        st.value = null;
-        console.log("clear textarea")
+    public resetTimer = function (rt: HTMLInputElement) {
+        console.log("clear Timer")
+        clearTimeout(this.myTimer);
+        this.myTimer = setTimeout(() => {
+            rt.value = null;
+            console.log("clear textarea")
+        }, 2000);
     }
     
-    resetTimer(rt: HTMLInputElement) {
-        // this.stuff.push(st.value);
-        console.log("clear Timer")
-        clearInterval(this.myTimer);
-        this.myTimer = setInterval(this.myTimerFunction(rt), 2000); 
+    public pauseTimer = () => {
+        clearTimeout(this.myTimer);
     }
 }
